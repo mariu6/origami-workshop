@@ -3,7 +3,7 @@ import Header from "./components/header";
 import styles from './App.module.css';
 import Aside from './components/aside';
 import Origamis from './components/origamis';
-
+import Footer from "./components/footer";
 
 
 
@@ -15,6 +15,7 @@ function App() {
         <Aside />
         <Origamis />
       </div>
+      <Footer />
     </div>
   );
 }
