@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-import styles from "./index.module.css";
+
+import React, { Component } from 'react';
+import styles from './index.module.css';
 import Origami from "../origami";
 
 class Origamis extends Component {
@@ -11,19 +12,20 @@ class Origamis extends Component {
     }
 
     getOriagmis = async () => {
-        const promise = await (await fetch("http://localhost:9999/api/origami"));    // фетчвам асинхронно (имам cors()) защото работя с окален сървър, нищо че той ползва клауд
+        const { length } = this.props;
+        const promise = await (await fetch(`http://localhost:9999/api/origami?length=${length}`));    // фетчвам асинхронно (имам cors()) защото работя с окален сървър, нищо че той ползва клауд
         const origamis = await promise.json();
         this.setState({
             origamis                // сетвам данните 
         })
     }
 
-    renderOrigamis(){
+    renderOrigamis() {
         const { origamis } = this.state;
         console.log(origamis);
         return origamis.map((origami, index) => {
             return (
-                <Origami key={origami._id} index = {index} {...origami}  />
+                <Origami key={origami._id} index={index} {...origami} />
             )
         })
     }
@@ -34,11 +36,8 @@ class Origamis extends Component {
 
     render() {
         return (
-            <div className={styles.container}>
-                <h1 className={styles.title}>Origamis</h1>
-                <div className={styles.posts}>
-                    {this.renderOrigamis()}
-                </div>
+            <div className={styles.posts}>
+                {this.renderOrigamis()}
             </div>
         )
     }
